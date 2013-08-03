@@ -26,8 +26,8 @@
  THE SOFTWARE.
  */
 
-#ifndef Samploid_ofxInAppProduct_h
-#define Samploid_ofxInAppProduct_h
+#ifndef ofxInAppProduct_h
+#define ofxInAppProduct_h
 
 
 #include "ofMain.h"
@@ -37,12 +37,14 @@
 #import <StoreKit/StoreKit.h>
 #import "SFHFKeychainUtils.h"
 extern BOOL otherTransactionInProgress;
-
+extern bool RestoreAllPurchasedItems;
 @interface PaymentObserver : NSObject <SKPaymentTransactionObserver> { 
     NSString  * extern_itemName;
     NSString * extern_unlockpass;
     NSString * extern_app_name;
     BOOL purchesed,TRANSACTIONFINISHED,CANCELED;
+    UIActivityIndicatorView *indicator;
+
 }
 - (void) initialize;
 - (void) passInformation: (NSString  *) itemName: (NSString  *)unloackPass: (NSString  *) appName;
@@ -51,10 +53,13 @@ extern BOOL otherTransactionInProgress;
 - (void) failedTransaction: (SKPaymentTransaction *)transaction;
 - (BOOL) isPurchesed;
 - (BOOL) TRANSACTION_NOT_COMPLETED;
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue;
+
 
 @end
 
 class ofxInAppProduct{
+    bool restoreTheItem;
     bool purchesed,onlyOneTime;
     NSString  * itemName;
     NSString * unlockpass;
@@ -64,20 +69,20 @@ class ofxInAppProduct{
     SKMutablePayment *payment;
     PaymentObserver *paymentObserver;
     UIAlertView *askToPurchase;
-    UIActivityIndicatorView *indicator;
   bool  transactionFinished;    
 
 public:
 ofxInAppProduct(char * productName,string unlockKey,string AppName);
 ofxInAppProduct(char * productName);
 ~ofxInAppProduct();
-    void buy();
+    void buy(int units =1);
     void unbuy();
     bool isPurchesed();
     bool isTransactionFinished();
     void reset();
     
 };
+void restoreAllPreviousTransactions();
 
 
 #endif

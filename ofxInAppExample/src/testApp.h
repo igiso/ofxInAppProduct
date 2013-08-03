@@ -25,6 +25,8 @@ public:
 	void deviceOrientationChanged(int newOrientation);
 
     ofxInAppProduct * dubKit;
+    ofxInAppProduct * coins;
+
 };
 
 

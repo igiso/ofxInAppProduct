@@ -32,23 +32,91 @@
 
 BOOL otherTransactionInProgress=false;
 
+bool RestoreAllPurchasedItems;
 
 @implementation PaymentObserver
 
 - (void) initialize{
     TRANSACTIONFINISHED=NO;
     CANCELED=NO;
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    CGPoint p;
+    p = ofxiPhoneGetGLView().center;
+    indicator.center = p;
+    [ofxiPhoneGetGLView() addSubview: indicator];
+    [indicator bringSubviewToFront:ofxiPhoneGetGLView()];
+    [indicator startAnimating];
+
 }
 - (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
 {
     purchesed=false;
 }
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    if ([queue.transactions count] == 0)
+    {
+        UIAlertView *restorealert = [[UIAlertView alloc]
+                                     initWithTitle:@"Restore"
+                                     message:@"No products purchased?"
+                                     delegate:self
+                                     cancelButtonTitle:@"Ok"
+                                     otherButtonTitles:nil];
+        
+        [restorealert show];
+        
+        
+    }
+    else
+    {
+        NSString *productID;
+        NSString *username;
+        NSString *unlockPass;
+        
+        
+        
+        for(SKPaymentTransaction *transaction in queue.transactions)
+        {
+            productID = transaction.payment.productIdentifier;
+            NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+            NSString *bundleName = [NSString stringWithFormat:@"%@", [info objectForKey:@"CFBundleDisplayName"]];
+            string standardAppName = [bundleName UTF8String];
+            
+            
+            string standardUnlocKey = ofToDataPath(productID.UTF8String).c_str();
+            standardUnlocKey.insert(standardUnlocKey.size(),standardAppName);
+            
+            
+            unlockPass = [[NSString alloc]initWithString:[NSString stringWithUTF8String: standardUnlocKey.c_str()]];
+            if (standardAppName.size()==0) {
+                cout<<"ofxInAppProduct::Warning:: Couldn't get Project's name: Using a Standard name instead::::";
+                standardAppName = ofToDataPath(productID.UTF8String).c_str();
+                standardAppName.insert(standardAppName.size(),"_OFAPP");
+            }
+            username = [[NSString alloc]initWithString:[NSString stringWithUTF8String: standardAppName.c_str()]];
+            
+            NSError *error = nil;
+            [SFHFKeychainUtils storeUsername:username andPassword:unlockPass forServiceName:productID updateExisting:YES error:&error];
+            RestoreAllPurchasedItems= true;
+            
+            [username release];
+            [unlockPass release];
+            cout<<"Restore Item: ..."<<productID.UTF8String<<endl;
+            //[[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+
+        }
+        
+    }
+    [indicator stopAnimating];
+
+}
+
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
     TRANSACTIONFINISHED = !TRANSACTIONFINISHED;
     if(TRANSACTIONFINISHED){
-        cout<<"Starting a new Transaction for item: "<<[extern_itemName UTF8String]<<" ";
         
     }else{
         cout<<"finishing.."<<endl;
@@ -98,6 +166,8 @@ BOOL otherTransactionInProgress=false;
     cout<<"DONE!";
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    [indicator stopAnimating];
+
     
 }
 
@@ -114,6 +184,7 @@ BOOL otherTransactionInProgress=false;
     cout<<"DONE!";
 
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    [indicator stopAnimating];
 
 
 }
@@ -128,6 +199,8 @@ BOOL otherTransactionInProgress=false;
         purchesed = NO;
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    [indicator stopAnimating];
+
 
 }
 - (void) passInformation:(NSString *)itemName :(NSString *)unloackPass :(NSString *)appName{
@@ -145,8 +218,7 @@ BOOL otherTransactionInProgress=false;
         NSError *error = nil;
     NSString *pass_AtkeyCain = [SFHFKeychainUtils getPasswordForUsername:extern_app_name andServiceName:extern_itemName error:&error];
     
-    
-if ([pass_AtkeyCain isEqualToString:extern_unlockpass])return YES; else return  NO;   
+if ([pass_AtkeyCain isEqualToString:extern_unlockpass])return YES; else return  NO;
    
 
 
@@ -156,41 +228,19 @@ if ([pass_AtkeyCain isEqualToString:extern_unlockpass])return YES; else return  
     
     return TRANSACTIONFINISHED;
 }
+- (void) releaseB {
+    [indicator release];
+}
+
+
 @end
 
 
 
-
-ofxInAppProduct::ofxInAppProduct(char * ProductName, string unlockKey, string AppName){
-purchesed =false;
-    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-    CGPoint p;
-    p = ofxiPhoneGetGLView().center;
-    indicator.center = p;
-    [ofxiPhoneGetGLView() addSubview: indicator];
-    [indicator bringSubviewToFront:ofxiPhoneGetGLView()];
-itemName =  [[NSString alloc]initWithString:[NSString stringWithCString:ProductName encoding:NSASCIIStringEncoding]];
-unlockpass = [[NSString alloc]initWithString:[NSString stringWithUTF8String: unlockKey.c_str()]];
-app_name = [[NSString alloc]initWithString:[NSString stringWithUTF8String: AppName.c_str()]];
-NSError *error = nil;
-NSString *pass_AtkeyCain = [SFHFKeychainUtils getPasswordForUsername:app_name andServiceName:itemName error:&error];
-if ([pass_AtkeyCain isEqualToString:unlockpass])purchesed=true; else purchesed =false;    
-    transactionFinished=true;    
-onlyOneTime = false;
-    paymentObserver =nil;
-
-}
-
 ofxInAppProduct::ofxInAppProduct(char * ProductName){
-purchesed =false;   
-    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-    CGPoint p;
-    p = ofxiPhoneGetGLView().center;
-    indicator.center = p;
-    [ofxiPhoneGetGLView() addSubview: indicator];
-    [indicator bringSubviewToFront:ofxiPhoneGetGLView()];
+purchesed =false;
+RestoreAllPurchasedItems=false;
+restoreTheItem=false;
 itemName =  [[NSString alloc]initWithString:[NSString stringWithCString:ProductName encoding:NSASCIIStringEncoding]];     
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSString *bundleName = [NSString stringWithFormat:@"%@", [info objectForKey:@"CFBundleDisplayName"]];
@@ -217,13 +267,12 @@ app_name = [[NSString alloc]initWithString:[NSString stringWithUTF8String: stand
 }
 
 
-void ofxInAppProduct::buy(){
+void ofxInAppProduct::buy(int units){
 if (!purchesed) {
     if (!onlyOneTime&&itemName!=nil&&!otherTransactionInProgress) {
         if([SKPaymentQueue canMakePayments]){
         otherTransactionInProgress=YES;
 
-            [indicator startAnimating];
  
         transactionFinished=false;    
 
@@ -234,7 +283,7 @@ paymentObserver = [[PaymentObserver alloc] init];
             }
             [paymentObserver initialize];                       
             payment.productIdentifier = itemName;
-            payment.quantity = 1;
+            payment.quantity = units;
     [paymentObserver passInformation:itemName :unlockpass :app_name];
 [[SKPaymentQueue defaultQueue] addTransactionObserver:paymentObserver];        
 [[SKPaymentQueue defaultQueue] addPayment:payment];
@@ -259,7 +308,6 @@ paymentObserver = [[PaymentObserver alloc] init];
         
     }else{
         if (onlyOneTime&&![paymentObserver TRANSACTION_NOT_COMPLETED]) {
-            [indicator stopAnimating];
             transactionFinished=true;
            
             
@@ -281,16 +329,33 @@ bool ofxInAppProduct::isPurchesed(){
         purchesed = this->paymentObserver.isPurchesed;
 
     }
-    if (purchesed){[indicator stopAnimating];
+    if (purchesed){
    
     if(onlyOneTime)[[SKPaymentQueue defaultQueue] removeTransactionObserver:paymentObserver];
 
     }
     if (onlyOneTime&&![paymentObserver TRANSACTION_NOT_COMPLETED]){
         transactionFinished=true;
-        [indicator stopAnimating];
     }
     
+  
+    
+    if (RestoreAllPurchasedItems) {
+        
+        if(!restoreTheItem){
+        cout<<"RESTORING"<<endl;
+        NSError *error = nil;
+        NSString *pass_AtkeyCain = [SFHFKeychainUtils getPasswordForUsername:app_name andServiceName:itemName error:&error];
+        if ([pass_AtkeyCain isEqualToString:unlockpass])purchesed=true; else purchesed =false;
+    restoreTheItem=true;
+
+    }
+    
+    }
+        
+        //            purchesed = this->paymentObserver.isPurchesed;
+//            restoreTheItem=true;
+            
     
     return purchesed;
 }
@@ -313,7 +378,6 @@ bool ofxInAppProduct::isTransactionFinished(){
 
 }
 void ofxInAppProduct::reset(){
-           [indicator stopAnimating];
 if (transactionFinished)onlyOneTime=false;
 }
 
@@ -321,13 +385,22 @@ ofxInAppProduct::~ofxInAppProduct(){
     [itemName release];
     [unlockpass release];
     [app_name release];
-    [indicator release];
 
     if(paymentObserver!=nil){
+        [paymentObserver releaseB];
         [paymentObserver release];
         [payment release];
     }
 
+    
+}
+
+void restoreAllPreviousTransactions(){
+        PaymentObserver *paymentObserver;
+        paymentObserver = [PaymentObserver new];
+        [paymentObserver initialize];
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:paymentObserver];
+        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     
 }
 

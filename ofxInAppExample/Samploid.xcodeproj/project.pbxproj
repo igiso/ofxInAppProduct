@@ -12,10 +12,10 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
-		5A80E258164F901500148457 /* ofxInAppProduct.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A80E255164F901500148457 /* ofxInAppProduct.mm */; };
-		5A80E259164F901500148457 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A80E257164F901500148457 /* SFHFKeychainUtils.m */; };
 		5AAA780C164CDD1A0068F81B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AAA780B164CDD1A0068F81B /* Security.framework */; };
 		5AAA780E164CDD290068F81B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AAA780D164CDD290068F81B /* StoreKit.framework */; };
+		5E104AA517AD357700FBE725 /* ofxInAppProduct.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E104AA217AD357700FBE725 /* ofxInAppProduct.mm */; };
+		5E104AA617AD357700FBE725 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E104AA417AD357700FBE725 /* SFHFKeychainUtils.m */; };
 		BB16EBD20F2B2A9500518274 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD10F2B2A9500518274 /* OpenGLES.framework */; };
 		BB16EBD90F2B2AB500518274 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD80F2B2AB500518274 /* QuartzCore.framework */; };
 		BB24DD8F10DA77E000E9C588 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BB24DD8C10DA77E000E9C588 /* Default.png */; };
@@ -28,7 +28,7 @@
 		E41D400C13B39D2100A75A5D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41D400713B39D2100A75A5D /* CoreMedia.framework */; };
 		E41D400D13B39D2100A75A5D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41D400813B39D2100A75A5D /* CoreVideo.framework */; };
 		E41D400E13B39D2100A75A5D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E41D400913B39D2100A75A5D /* MapKit.framework */; };
-		E41D421413B3A95300A75A5D /* libofxiPhone_iphoneos_Release.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E41D410213B3A0D800A75A5D /* libofxiPhone_iphoneos_Release.a */; };
+		E41D421413B3A95300A75A5D /* libofxiPhone_iphoneos_Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E41D410213B3A0D800A75A5D /* libofxiPhone_iphoneos_Debug.a */; };
 		E4A823A412561BE3002F86A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A823A312561BE3002F86A2 /* CoreGraphics.framework */; };
 		E4D8936E11527B74007E1F53 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D8936B11527B74007E1F53 /* main.mm */; };
 		E4D8936F11527B74007E1F53 /* testApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D8936D11527B74007E1F53 /* testApp.mm */; };
@@ -59,12 +59,12 @@
 		32CA4F630368D1EE00C91783 /* iPhone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhone_Prefix.pch; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		5A80E254164F901500148457 /* ofxInAppProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInAppProduct.h; sourceTree = "<group>"; };
-		5A80E255164F901500148457 /* ofxInAppProduct.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxInAppProduct.mm; sourceTree = "<group>"; };
-		5A80E256164F901500148457 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
-		5A80E257164F901500148457 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		5AAA780B164CDD1A0068F81B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5AAA780D164CDD290068F81B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5E104AA117AD357700FBE725 /* ofxInAppProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInAppProduct.h; sourceTree = "<group>"; };
+		5E104AA217AD357700FBE725 /* ofxInAppProduct.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxInAppProduct.mm; sourceTree = "<group>"; };
+		5E104AA317AD357700FBE725 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		5E104AA417AD357700FBE725 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		BB16EBD10F2B2A9500518274 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BB16EBD80F2B2AB500518274 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BB24DD8C10DA77E000E9C588 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			files = (
 				5AAA780E164CDD290068F81B /* StoreKit.framework in Frameworks */,
 				5AAA780C164CDD1A0068F81B /* Security.framework in Frameworks */,
-				E41D421413B3A95300A75A5D /* libofxiPhone_iphoneos_Release.a in Frameworks */,
+				E41D421413B3A95300A75A5D /* libofxiPhone_iphoneos_Debug.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -154,16 +154,16 @@
 			name = "core frameworks";
 			sourceTree = "<group>";
 		};
-		5A80E253164F901500148457 /* ofxinAppPurchase */ = {
+		5E104AA017AD357700FBE725 /* ofxinAppProduct */ = {
 			isa = PBXGroup;
 			children = (
-				5A80E254164F901500148457 /* ofxInAppProduct.h */,
-				5A80E255164F901500148457 /* ofxInAppProduct.mm */,
-				5A80E256164F901500148457 /* SFHFKeychainUtils.h */,
-				5A80E257164F901500148457 /* SFHFKeychainUtils.m */,
+				5E104AA117AD357700FBE725 /* ofxInAppProduct.h */,
+				5E104AA217AD357700FBE725 /* ofxInAppProduct.mm */,
+				5E104AA317AD357700FBE725 /* SFHFKeychainUtils.h */,
+				5E104AA417AD357700FBE725 /* SFHFKeychainUtils.m */,
 			);
-			name = ofxinAppPurchase;
-			path = src/ofxinAppPurchase;
+			name = ofxinAppProduct;
+			path = ../../../addons/ofxinAppProduct;
 			sourceTree = "<group>";
 		};
 		BB16E9930F2B1E5900518274 /* libs */ = {
@@ -177,7 +177,7 @@
 		BB16F26B0F2B646B00518274 /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				5A80E253164F901500148457 /* ofxinAppPurchase */,
+				5E104AA017AD357700FBE725 /* ofxinAppProduct */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 		E41D40FE13B3A0D800A75A5D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E41D410213B3A0D800A75A5D /* libofxiPhone_iphoneos_Release.a */,
+				E41D410213B3A0D800A75A5D /* libofxiPhone_iphoneos_Debug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -283,10 +283,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E41D410213B3A0D800A75A5D /* libofxiPhone_iphoneos_Release.a */ = {
+		E41D410213B3A0D800A75A5D /* libofxiPhone_iphoneos_Debug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libofxiPhone_iphoneos_Release.a;
+			path = libofxiPhone_iphoneos_Debug.a;
 			remoteRef = E41D410113B3A0D800A75A5D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -330,8 +330,8 @@
 			files = (
 				E4D8936E11527B74007E1F53 /* main.mm in Sources */,
 				E4D8936F11527B74007E1F53 /* testApp.mm in Sources */,
-				5A80E258164F901500148457 /* ofxInAppProduct.mm in Sources */,
-				5A80E259164F901500148457 /* SFHFKeychainUtils.m in Sources */,
+				5E104AA517AD357700FBE725 /* ofxInAppProduct.mm in Sources */,
+				5E104AA617AD357700FBE725 /* SFHFKeychainUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
