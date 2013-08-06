@@ -1,0 +1,29 @@
+<install>
+
+	<version>0.1</version>
+	<author>Kyriacos Kousoulides</author>
+	<url>........</url>
+
+	<requires>
+	</requires>
+
+	<add>	
+		<src>
+			<folder name="addons/ofxinAppProduct/src">			
+				<file>../../../addons/ofxinAppProduct/src/ofxinAppProduct.h</file>
+				<file>../../../addons/ofxinAppProduct/src/ofxinAppProduct.cpp</file>
+                <file>../../../addons/ofxinAppProduct/src/SFHFKeychainUtils.h</file>
+				<file>../../../addons/ofxinAppProduct/src/SFHFKeychainUtils.cpp</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/ofxinAppProduct/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>
